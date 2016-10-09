@@ -204,6 +204,16 @@ public class LibraryService {
         request.execute();
     }
 
+    //TODO: Remove this function and use getGadgets instead
+    public static void getGadgets2(final Callback<List<Gadget>> callback) {
+        List<Gadget> input = new ArrayList<>();
+        input.add(new Gadget("iPhone1"));
+        input.add(new Gadget("iPhone2"));
+        input.add(new Gadget("iPhone3"));
+        input.add(new Gadget("iPhone4"));
+        callback.onCompletion(input);
+    }
+
     private static String getTokenAsString() {
         Gson gson = createGsonObject();
         return gson.toJson(token);
