@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -58,6 +59,16 @@ public class SignUpActivity extends Activity implements LoaderManager.LoaderCall
         passwordInputView = (EditText) findViewById(R.id.password);
         nameInputView = (EditText) findViewById(R.id.name);
         studentIdInputView = (EditText) findViewById(R.id.student_id);
+
+        View mainButton = findViewById(R.id.mainButton);
+
+        mainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         populateAutoComplete();
 
