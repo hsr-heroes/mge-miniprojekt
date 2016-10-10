@@ -1,6 +1,15 @@
 <resources>
     <string name="app_name">Gadgeothek</string>
 
+    <!-- Menu -->
+    <string name="action_settings">Settings</string>
+    <string name="action_gadgets">Gadgets</string>
+    <string name="action_loans">My Loans</string>
+    <string name="action_reservations">My Reservation</string>
+    <string name="action_reservation_new">Add Reservation</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
     <!-- SignUpActivity -->
     <string name="title_activity_signup">Sign up</string>
     <string name="prompt_name">Name</string>

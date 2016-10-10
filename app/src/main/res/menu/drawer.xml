@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawerGadgets"
+            android:checked="true"
+            android:icon="@drawable/ic_devices_black_24dp"
+            android:title="@string/action_gadgets" />
+
+        <item
+            android:id="@+id/drawerMyLoans"
+            android:icon="@drawable/ic_update_black_24dp"
+            android:title="@string/action_loans" />
+
+        <item
+            android:id="@+id/drawerMyReservations"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="@string/action_reservations" />
+
+        <item
+            android:id="@+id/drawerNewReservation"
+            android:icon="@drawable/ic_add_circle_outline_black_24dp"
+            android:title="@string/action_reservation_new" />
+
+    </group>
+</menu>

@@ -1,35 +1,42 @@
 package ch.hsr.mge.gadgeothek;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Loan;
 import ch.hsr.mge.gadgeothek.domain.Reservation;
-import ch.hsr.mge.gadgeothek.service.LibraryService;
 
-public class MainActivity extends Activity implements OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LibraryService.setServerAddress("http://mge1.dev.ifs.hsr.ch/public");
+        drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
 
-        View signupButton = findViewById(R.id.signupButton);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        signupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
+        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
         getFragmentManager()
                 .beginTransaction()
@@ -62,4 +69,46 @@ public class MainActivity extends Activity implements OnFragmentInteractionListe
                 .commit();
     }
 
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.drawerGadgets:
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container , GadgetListFragment.newInstance(1))
+                        .commit();
+                break;
+            case R.id.drawerMyLoans :
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container , LoanListFragment.newInstance(1))
+                        .commit();
+                break;
+            case R.id.drawerMyReservations :
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container , ReservationListFragment.newInstance(1))
+                        .commit();
+                break;
+            case R.id.drawerNewReservation :
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container , ReservationListFragment.newInstance(1))
+                        .commit();
+                break;
+        }
+        item.setChecked(true);
+        drawer.closeDrawers();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
