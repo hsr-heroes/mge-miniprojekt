@@ -60,6 +60,7 @@ public class LoanListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_loan_list, container, false);
 
+        mListener.setToolbarTitle("My Loans");
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

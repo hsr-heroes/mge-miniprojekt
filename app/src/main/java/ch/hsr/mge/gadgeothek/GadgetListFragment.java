@@ -60,6 +60,7 @@ public class GadgetListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gadget_list, container, false);
 
+        mListener.setToolbarTitle("Gadgets");
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();

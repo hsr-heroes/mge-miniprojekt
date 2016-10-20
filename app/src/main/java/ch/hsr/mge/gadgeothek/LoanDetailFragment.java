@@ -58,6 +58,7 @@ public class LoanDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_loan_detail, container, false);
         TextView inventoryNr = (TextView) v.findViewById(R.id.loan_id);
         inventoryNr.setText(loanId);
+        mListener.setToolbarTitle("Loan Details");
         return v;
     }
 

@@ -58,6 +58,7 @@ public class ReservationDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_reservation_detail, container, false);
         TextView inventoryNr = (TextView) v.findViewById(R.id.reservation_id);
         inventoryNr.setText(reservationId);
+        mListener.setToolbarTitle("Reservation Details");
         return v;
     }
 

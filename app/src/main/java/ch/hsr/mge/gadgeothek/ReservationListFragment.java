@@ -60,6 +60,7 @@ public class ReservationListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservation_list, container, false);
 
+        mListener.setToolbarTitle("My Reservations");
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -76,7 +77,7 @@ public class ReservationListFragment extends Fragment {
                 }
                 @Override
                 public void onError(String message) {
-                    Log.d("getReservationsForCustomer()", message);
+                    Log.d("onError not implemented", message);
                 }
             };
             LibraryService.getReservationsForCustomer(callback);

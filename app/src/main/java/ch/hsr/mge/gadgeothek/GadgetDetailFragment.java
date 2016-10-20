@@ -58,6 +58,7 @@ public class GadgetDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_gadget_detail, container, false);
         TextView inventoryNr = (TextView) v.findViewById(R.id.gadget_inventory_number);
         inventoryNr.setText(gadgetId);
+        mListener.setToolbarTitle("Gadget Details");
         return v;
     }
 
