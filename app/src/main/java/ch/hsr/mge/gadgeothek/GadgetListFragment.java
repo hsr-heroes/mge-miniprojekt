@@ -80,7 +80,7 @@ public class GadgetListFragment extends Fragment {
                     Log.d("getGadgets2()", message);
                 }
             };
-            LibraryService.getGadgets2(callback);
+            LibraryService.getGadgets(callback);
 
         }
         return view;
