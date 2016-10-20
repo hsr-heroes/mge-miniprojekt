@@ -12,11 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-public class StartActivity extends AppCompatActivity implements OnFragmentInteractionListener, AdapterView.OnItemSelectedListener {
+public class StartActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
-    private Spinner spinner;
-    private TextInputLayout serverLayout;
-    private EditText address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +24,6 @@ public class StartActivity extends AppCompatActivity implements OnFragmentIntera
                 .beginTransaction()
                 .add(R.id.fragment_container_start, new SignInFragment())
                 .commit();
-
-        spinner = (Spinner) findViewById(R.id.server_spinner);
-        address = (EditText) findViewById(R.id.server);
-        serverLayout = (TextInputLayout) findViewById(R.id.server_layout);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.server_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -54,25 +42,21 @@ public class StartActivity extends AppCompatActivity implements OnFragmentIntera
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selection = (String) parent.getItemAtPosition(position);
-        switch (selection) {
-            case "Localhost":
-                address.setText("http://localhost");
-                serverLayout.setVisibility(View.INVISIBLE);
+    public void onClick(View v) {
+        Fragment fragment = null;
+        switch (v.getId()) {
+            case R.id.registration_button:
+                fragment = new SignUpFragment();
                 break;
-            case "MG1":
-                address.setText("http://mge1.dev.ifs.hsr.ch");
-                serverLayout.setVisibility(View.INVISIBLE);
+            case R.id.signin_button:
+                fragment = new SignInFragment();
                 break;
-            default:
-                serverLayout.setVisibility(View.VISIBLE);
         }
-    }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container_start, fragment)
+                .commit();
     }
 }
 

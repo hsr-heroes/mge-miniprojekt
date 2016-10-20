@@ -65,6 +65,7 @@ public class SignInFragment extends Fragment {
                 signInUser();
             }
         });
+        v.findViewById(R.id.registration_button).setOnClickListener(mListener);
         return v;
     }
 
