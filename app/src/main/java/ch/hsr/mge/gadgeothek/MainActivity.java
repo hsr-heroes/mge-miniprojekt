@@ -1,6 +1,7 @@
 package ch.hsr.mge.gadgeothek;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,16 +10,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.List;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Loan;
 import ch.hsr.mge.gadgeothek.domain.Reservation;
+import ch.hsr.mge.gadgeothek.service.Callback;
+import ch.hsr.mge.gadgeothek.service.LibraryService;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,31 +78,38 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.drawerGadgets:
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container , GadgetListFragment.newInstance(1))
-                        .commit();
-                break;
+                fragment = GadgetListFragment.newInstance(1);
             case R.id.drawerMyLoans :
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container , LoanListFragment.newInstance(1))
-                        .commit();
+                fragment = LoanListFragment.newInstance(1);
                 break;
             case R.id.drawerMyReservations :
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container , ReservationListFragment.newInstance(1))
-                        .commit();
+                fragment = ReservationListFragment.newInstance(1);
                 break;
             case R.id.drawerNewReservation :
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container , ReservationListFragment.newInstance(1))
-                        .commit();
+                fragment = ReservationAddFragment.newInstance(0);
                 break;
+            default: // case R.id.drawerLogout :
+                LibraryService.logout(new Callback<Boolean> () {
+                    @Override
+                    public void onCompletion(Boolean input) {
+                        Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onError(String message) {
+                        Log.d("onError not implemented", message);
+                    }
+                });
+        }
+        if (fragment != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container , fragment)
+                    .addToBackStack(null)
+                    .commit();
         }
         item.setChecked(true);
         drawer.closeDrawers();

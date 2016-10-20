@@ -22,5 +22,9 @@
             android:icon="@drawable/ic_add_circle_outline_black_24dp"
             android:title="@string/action_reservation_new" />
 
+        <item
+            android:id="@+id/drawerLogout"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="@string/action_logout" />
     </group>
 </menu>
