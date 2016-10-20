@@ -12,9 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-
-import java.util.List;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Loan;
@@ -31,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LibraryService.setServerAddress("http://mge1.dev.ifs.hsr.ch");
 
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
 
@@ -66,13 +65,13 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     public void onListFragmentInteraction(Object item) {
         Fragment fragment;
         if (item instanceof Gadget) {
-            fragment = GadgetDetailFragment.newInstance(((Gadget) item).getInventoryNumber());
+            fragment = GadgetDetailFragment.newInstance((Gadget) item);
         } else if (item instanceof Loan) {
-            fragment = LoanDetailFragment.newInstance(((Loan) item).getLoanId());
+            fragment = LoanDetailFragment.newInstance((Loan) item);
         } else if (item instanceof Reservation) {
-            fragment = ReservationDetailFragment.newInstance(((Reservation) item).getReservationId());
+            fragment = ReservationDetailFragment.newInstance((Reservation) item);
         } else {
-            throw new RuntimeException("item is not an instance of Gadget, Loan or Reservation");
+            throw new IllegalStateException("Item is not an instance of Gadget, Loan or Reservation");
         }
         getFragmentManager()
                 .beginTransaction()

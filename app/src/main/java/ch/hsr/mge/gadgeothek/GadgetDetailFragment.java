@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Locale;
+
+import ch.hsr.mge.gadgeothek.domain.Gadget;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,24 +24,13 @@ import android.widget.TextView;
 public class GadgetDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "ARG_ITEM_ID";
 
-    private String gadgetId;
+    private Gadget mGadget;
     private OnFragmentInteractionListener mListener;
 
-    public GadgetDetailFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param id Parameter 1.
-     * @return A new instance of fragment GadgetDetailFragment.
-     */
-    public static GadgetDetailFragment newInstance(String id) {
+    public static GadgetDetailFragment newInstance(Gadget gadget) {
         GadgetDetailFragment fragment = new GadgetDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_ITEM_ID, id);
+        args.putSerializable(ARG_ITEM_ID, gadget);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +39,7 @@ public class GadgetDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            gadgetId = getArguments().getString(ARG_ITEM_ID);
+            mGadget = (Gadget) getArguments().getSerializable(ARG_ITEM_ID);
         }
     }
 
@@ -56,17 +48,20 @@ public class GadgetDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_gadget_detail, container, false);
-        TextView inventoryNr = (TextView) v.findViewById(R.id.gadget_inventory_number);
-        inventoryNr.setText(gadgetId);
-        mListener.setToolbarTitle("Gadget Details");
+        initUI(v);
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    private void initUI(View v) {
+        mListener.setToolbarTitle(mGadget.getName());
+        TextView name = (TextView) v.findViewById(R.id.gadget_name);
+        name.setText(mGadget.getName());
+        TextView manufacturer = (TextView) v.findViewById(R.id.gadget_manufacturer);
+        manufacturer.setText(mGadget.getManufacturer());
+        TextView price = (TextView) v.findViewById(R.id.gadget_price);
+        price.setText(String.format(Locale.getDefault(), "%f", mGadget.getPrice()));
+        TextView condition = (TextView) v.findViewById(R.id.gadget_condition);
+        condition.setText(mGadget.getCondition().toString());
     }
 
     @Override

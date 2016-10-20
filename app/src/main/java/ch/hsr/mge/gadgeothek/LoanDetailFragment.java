@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ch.hsr.mge.gadgeothek.domain.Loan;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,24 +22,13 @@ import android.widget.TextView;
 public class LoanDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "ARG_ITEM_ID";
 
-    private String loanId;
+    private Loan mLoan;
     private OnFragmentInteractionListener mListener;
 
-    public LoanDetailFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param id Parameter 1.
-     * @return A new instance of fragment LoanDetailFragment.
-     */
-    public static LoanDetailFragment newInstance(String id) {
+    public static LoanDetailFragment newInstance(Loan loan) {
         LoanDetailFragment fragment = new LoanDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_ITEM_ID, id);
+        args.putSerializable(ARG_ITEM_ID, loan);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +37,7 @@ public class LoanDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            loanId = getArguments().getString(ARG_ITEM_ID);
+            mLoan = (Loan) getArguments().getSerializable(ARG_ITEM_ID);
         }
     }
 
@@ -56,17 +46,9 @@ public class LoanDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_loan_detail, container, false);
-        TextView inventoryNr = (TextView) v.findViewById(R.id.loan_id);
-        inventoryNr.setText(loanId);
         mListener.setToolbarTitle("Loan Details");
+        // TODO: 20.10.2016 initUI
         return v;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override

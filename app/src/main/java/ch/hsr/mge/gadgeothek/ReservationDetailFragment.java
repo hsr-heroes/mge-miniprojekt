@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ch.hsr.mge.gadgeothek.domain.Reservation;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,24 +22,13 @@ import android.widget.TextView;
 public class ReservationDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "ARG_ITEM_ID";
 
-    private String reservationId;
+    private Reservation mReservation;
     private OnFragmentInteractionListener mListener;
 
-    public ReservationDetailFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param id Parameter 1.
-     * @return A new instance of fragment ReservationDetailFragment.
-     */
-    public static ReservationDetailFragment newInstance(String id) {
+    public static ReservationDetailFragment newInstance(Reservation reservation) {
         ReservationDetailFragment fragment = new ReservationDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_ITEM_ID, id);
+        args.putSerializable(ARG_ITEM_ID, reservation);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +37,7 @@ public class ReservationDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            reservationId = getArguments().getString(ARG_ITEM_ID);
+            mReservation = (Reservation) getArguments().getSerializable(ARG_ITEM_ID);
         }
     }
 
@@ -56,17 +46,9 @@ public class ReservationDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_reservation_detail, container, false);
-        TextView inventoryNr = (TextView) v.findViewById(R.id.reservation_id);
-        inventoryNr.setText(reservationId);
         mListener.setToolbarTitle("Reservation Details");
+        // TODO: 20.10.2016 initUI
         return v;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
