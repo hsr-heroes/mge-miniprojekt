@@ -77,7 +77,7 @@ public class LibraryService {
         parameter.put("name", name);
         parameter.put("studentnumber", studentenNumber);
 
-        Request<Boolean> request = new Request<>(HttpVerb.POST, serverUrl + "/register", Boolean.class, parameter, new Callback<Boolean>() {
+        Request<Boolean> request = new Request<>(HttpVerb.POST, serverUrl + "/public/register", Boolean.class, parameter, new Callback<Boolean>() {
             @Override
             public void onCompletion(Boolean input) {
                 callback.onCompletion(input);
