@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                 LibraryService.logout(new Callback<Boolean> () {
                     @Override
                     public void onCompletion(Boolean input) {
-                        Intent intent = new Intent(getBaseContext(),SignUpActivity.class);
+                        Intent intent = new Intent(getBaseContext(),StartActivity.class);
                         startActivity(intent);
                     }
                     @Override
