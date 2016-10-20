@@ -10,7 +10,6 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-    <!-- SignUpActivity -->
     <string name="title_activity_signup">Sign up</string>
     <string name="prompt_name">Name</string>
     <string name="prompt_email">Email</string>
