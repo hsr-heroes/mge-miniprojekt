@@ -36,4 +36,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_reservation_add">Add Reservation</string>
+    <string name="action_logout">Logout</string>
+    <string name="title_activity_start">Sign in</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="action_registration">Sign Up</string>
 </resources>

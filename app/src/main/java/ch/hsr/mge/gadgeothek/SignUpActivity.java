@@ -60,16 +60,6 @@ public class SignUpActivity extends Activity implements LoaderManager.LoaderCall
         nameInputView = (EditText) findViewById(R.id.name);
         studentIdInputView = (EditText) findViewById(R.id.student_id);
 
-        View mainButton = findViewById(R.id.mainButton);
-
-        mainButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         populateAutoComplete();
 
         inputValidationHelper = new InputValidationHelper();
@@ -183,6 +173,8 @@ public class SignUpActivity extends Activity implements LoaderManager.LoaderCall
                 // Todo: Do something.
                 showProgress(false);
                 Log.d(getString(R.string.app_name), "Registration action complete. Success: " + success);
+                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                startActivity(intent);
             }
 
             @Override
