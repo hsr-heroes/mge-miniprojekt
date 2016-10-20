@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ch.hsr.mge.gadgeothek.SettingsFragment">
+    tools:context="ch.hsr.mge.gadgeothek.ServerAddressFragment">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -42,6 +42,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/prompt_server"
+            android:inputType="text"
+            android:imeOptions="actionUnspecified"
             android:imeActionLabel="@string/prompt_server"
             android:maxLines="1" />
 

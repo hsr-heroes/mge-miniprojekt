@@ -56,6 +56,13 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <fragment
+                android:id="@+id/server_fragment"
+                class="ch.hsr.mge.gadgeothek.ServerAddressFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout="@layout/fragment_sign_in"/>
+
             <Button
                 android:id="@+id/email_sign_in_button"
                 style="?android:textAppearanceSmall"

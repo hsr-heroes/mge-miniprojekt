@@ -13,17 +13,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.support.v7.widget.Toolbar;
 
+public class ServerAddressFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-
-    private OnFragmentInteractionListener mListener;
     private Spinner spinner;
     private TextInputLayout serverLayout;
     private EditText address;
+    private OnFragmentInteractionListener mListener;
 
-    public SettingsFragment() {
+    public ServerAddressFragment() {
         // Required empty public constructor
     }
 
@@ -35,7 +33,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        View root = inflater.inflate(R.layout.fragment_server_address, container, false);
         spinner = (Spinner) root.findViewById(R.id.server_spinner);
         address = (EditText) root.findViewById(R.id.server);
         serverLayout = (TextInputLayout) root.findViewById(R.id.server_layout);
@@ -45,10 +43,6 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         return root;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
     }
 
     @Override
@@ -68,18 +62,17 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         mListener = null;
     }
 
-    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         String selection = (String) parent.getItemAtPosition(position);
         Log.d("TAG", selection);
         switch (selection) {
             case "Localhost":
-                address.setText("http://localhost/public");
+                address.setText("http://localhost");
                 serverLayout.setVisibility(View.INVISIBLE);
                 break;
             case "MG1":
-                address.setText("http://mge1.dev.ifs.hsr.ch/public");
+                address.setText("http://mge1.dev.ifs.hsr.ch");
                 serverLayout.setVisibility(View.INVISIBLE);
                 break;
             default:
@@ -92,8 +85,5 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-
-    public interface OnFragmentInteractionListener {
-
-    }
 }
+
