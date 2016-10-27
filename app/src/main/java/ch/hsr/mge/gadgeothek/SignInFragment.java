@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
@@ -62,7 +64,7 @@ public class SignInFragment extends Fragment {
         signupButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signInUser();
+                signInUser(v);
             }
         });
         v.findViewById(R.id.registration_button).setOnClickListener(mListener);
@@ -93,7 +95,7 @@ public class SignInFragment extends Fragment {
         mListener = null;
     }
 
-    private void signInUser() {
+    private void signInUser(View view) {
         // Get values at the time of the signup attempt.
         String email = emailInputView.getText().toString();
         String password = passwordInputView.getText().toString();
@@ -118,12 +120,20 @@ public class SignInFragment extends Fragment {
         // Show a progress spinner, and kick off the async signup task.
         showProgress(true);
 
-        // Todo: Use correct server address.
-        // Todo: Get server address from settings.
-        LibraryService.setServerAddress("http://mge8.dev.ifs.hsr.ch");
+        final SharedPreferences settings = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+
+        EditText serverAddressView = (EditText) view.findViewById(R.id.server);
+        String serverAddress = settings.getString("server", serverAddressView.getText().toString());
+
+        LibraryService.setServerAddress(serverAddress);
         LibraryService.login(email,password, new Callback<Boolean>() {
             @Override
             public void onCompletion(Boolean success) {
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("token", LibraryService.getTokenAsString());
+
+                editor.apply();
+
                 showProgress(false);
                 Log.d(getString(R.string.app_name), "Login action complete. Success: " + success);
                 Intent intent = new Intent(getActivity(), MainActivity.class);

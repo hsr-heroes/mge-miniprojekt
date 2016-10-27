@@ -204,7 +204,7 @@ public class LibraryService {
         request.execute();
     }
 
-    private static String getTokenAsString() {
+    public static String getTokenAsString() {
         Gson gson = createGsonObject();
         return gson.toJson(token);
     }

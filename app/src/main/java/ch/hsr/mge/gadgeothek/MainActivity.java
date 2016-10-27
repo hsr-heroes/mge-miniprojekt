@@ -1,7 +1,9 @@
 package ch.hsr.mge.gadgeothek;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Loan;
@@ -30,7 +33,9 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LibraryService.setServerAddress("http://mge1.dev.ifs.hsr.ch");
+        final SharedPreferences settings = getSharedPreferences("User", Context.MODE_PRIVATE);
+
+        LibraryService.setServerAddress(settings.getString("server", "http://localhost"));
 
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
 

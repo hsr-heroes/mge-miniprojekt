@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -89,7 +90,7 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
         submitButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signUpUser();
+                signUpUser(v);
             }
         });
 
@@ -143,10 +144,10 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
      *
      * If there are form errors, the the first error is presented and no actual signup attempt is made.
      */
-    private void signUpUser() {
+    private void signUpUser(View view) {
         // Get values at the time of the signup attempt.
-        String name = nameInputView.getText().toString();
-        String studentId = studentIdInputView.getText().toString();
+        final String name = nameInputView.getText().toString();
+        final String studentId = studentIdInputView.getText().toString();
         final String email = emailInputView.getText().toString();
         final String password = passwordInputView.getText().toString();
 
@@ -184,12 +185,15 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
             passwordInputView.setError(null);
         }
 
+        EditText serverAddressView = (EditText) view.findViewById(R.id.server);
+
+        // Todo: Validate server address.
+        final String serverAddress = serverAddressView.getText().toString();
+
         // Show a progress spinner, and kick off the async signup task.
         showProgress(true);
 
-        // Todo: Use correct server address.
-        // Todo: Get server address from settings.
-        LibraryService.setServerAddress("http://mge8.dev.ifs.hsr.ch");
+        LibraryService.setServerAddress(serverAddress);
         LibraryService.register(email, password, name, studentId, new Callback<Boolean>() {
             @Override
             public void onCompletion(Boolean success) {
@@ -198,6 +202,16 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
                 LibraryService.login(email, password, new Callback<Boolean>() {
                     @Override
                     public void onCompletion(Boolean input) {
+                        SharedPreferences settings = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = settings.edit();
+
+                        editor.putString("server", serverAddress);
+                        editor.putString("name", name);
+                        editor.putString("email", email);
+                        editor.putString("studentId", studentId);
+
+                        editor.apply();
+
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
                         Log.d("RESULT", "Sign in done");
