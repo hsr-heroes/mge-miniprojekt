@@ -2,39 +2,21 @@ package ch.hsr.mge.gadgeothek;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Fragment;
-import android.app.LoaderManager;
 import android.content.Context;
-import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
-
-import static android.Manifest.permission.READ_CONTACTS;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,12 +26,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  * Use the {@link SignUpFragment} factory method to
  * create an instance of this fragment.
  */
-public class SignUpFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
-
-    private static final int REQUEST_READ_CONTACTS = 0;
-
+public class SignUpFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
-    private AutoCompleteTextView emailInputView;
+    private EditText emailInputView;
     private View progressBarView;
     private View signupFormView;
     private EditText passwordInputView;
@@ -76,14 +55,12 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
 
         progressBarView = v.findViewById(R.id.signup_progress);
         signupFormView = v.findViewById(R.id.signup_form);
-        emailInputView = (AutoCompleteTextView) v.findViewById(R.id.email);
+        emailInputView = (EditText) v.findViewById(R.id.email);
         passwordInputView = (EditText) v.findViewById(R.id.password);
         nameInputView = (EditText) v.findViewById(R.id.name);
         studentIdInputView = (EditText) v.findViewById(R.id.student_id);
         submitButtonView = v.findViewById(R.id.signup_button);
         v.findViewById(R.id.signin_button).setOnClickListener(mListener);
-
-        populateAutoComplete();
 
         inputValidationHelper = new InputValidationHelper();
 
@@ -95,48 +72,6 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
         });
 
         return v;
-    }
-
-    private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
-            return;
-        }
-
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (getActivity().checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(emailInputView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
-        }
     }
 
     /**
@@ -290,58 +225,5 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
             progressBarView.setVisibility(show ? View.VISIBLE : View.GONE);
             signupFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
-    }
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(getActivity(),
-                // Retrieve data rows for the device user's 'profile' contact.
-                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), SignUpFragment.ProfileQuery.PROJECTION,
-
-                // Select only email addresses.
-                ContactsContract.Contacts.Data.MIMETYPE + " = ?", new String[]{ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE},
-
-                /*
-                 * Show primary email addresses first.
-                 *
-                 * Note that there won't be a primary email address if the user hasn't specified one.
-                 */
-                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        List<String> emails = new ArrayList<>();
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            emails.add(cursor.getString(SignUpFragment.ProfileQuery.ADDRESS));
-            cursor.moveToNext();
-        }
-
-        addEmailsToAutoComplete(emails);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
-
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        // Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        emailInputView.setAdapter(adapter);
-    }
-
-    private interface ProfileQuery {
-        String[] PROJECTION = {
-                ContactsContract.CommonDataKinds.Email.ADDRESS,
-                ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
-        };
-
-        int ADDRESS = 0;
     }
 }
