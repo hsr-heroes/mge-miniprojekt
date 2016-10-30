@@ -109,7 +109,7 @@ public class SignInFragment extends Fragment {
             emailInputView.setError(null);
         }
 
-        if (inputValidationHelper.isEmpty(password)) {
+        if (password.isEmpty()) {
             passwordInputView.setError(getString(R.string.error_field_required));
             passwordInputView.requestFocus();
             return;

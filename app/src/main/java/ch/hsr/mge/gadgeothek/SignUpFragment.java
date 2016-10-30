@@ -153,7 +153,7 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
 
         // Input validation.
 
-        if (inputValidationHelper.isEmpty(name)) {
+        if (name.isEmpty()) {
             nameInputView.setError(getString(R.string.error_field_required));
             nameInputView.requestFocus();
             return;
@@ -161,7 +161,7 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
             nameInputView.setError(null);
         }
 
-        if (inputValidationHelper.isEmpty(studentId) || !inputValidationHelper.isNumeric(studentId)) {
+        if (studentId.isEmpty() || !inputValidationHelper.isNumeric(studentId)) {
             studentIdInputView.setError(getString(R.string.error_field_required));
             studentIdInputView.requestFocus();
             return;
@@ -177,7 +177,7 @@ public class SignUpFragment extends Fragment implements LoaderManager.LoaderCall
             emailInputView.setError(null);
         }
 
-        if (inputValidationHelper.isEmpty(password)) {
+        if (password.isEmpty()) {
             passwordInputView.setError(getString(R.string.error_field_required));
             passwordInputView.requestFocus();
             return;
