@@ -209,6 +209,11 @@ public class LibraryService {
         return gson.toJson(token);
     }
 
+    public static void setTokenFromString(String input) {
+        Gson gson = createGsonObject();
+        token = gson.fromJson(input, LoginToken.class);
+    }
+
     static Gson createGsonObject() {
         return new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     }
