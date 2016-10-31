@@ -27,13 +27,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
+    private SharedPreferences settings = getSharedPreferences("User", MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final SharedPreferences settings = getSharedPreferences("User", MODE_PRIVATE);
 
         LibraryService.setServerAddress(settings.getString("server", "http://localhost"));
         LibraryService.setTokenFromString(settings.getString("token", LibraryService.getTokenAsString()));
@@ -94,22 +93,27 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             case R.id.drawerGadgets:
                 fragment = GadgetListFragment.newInstance(1);
                 break;
-            case R.id.drawerMyLoans :
+            case R.id.drawerMyLoans:
                 fragment = LoanListFragment.newInstance(1);
                 break;
-            case R.id.drawerMyReservations :
+            case R.id.drawerMyReservations:
                 fragment = ReservationListFragment.newInstance(1);
                 break;
-            case R.id.drawerNewReservation :
+            case R.id.drawerNewReservation:
                 fragment = ReservationAddFragment.newInstance(0);
                 break;
             default: // case R.id.drawerLogout :
-                LibraryService.logout(new Callback<Boolean> () {
+                LibraryService.logout(new Callback<Boolean>() {
                     @Override
                     public void onCompletion(Boolean input) {
-                        Intent intent = new Intent(getBaseContext(),StartActivity.class);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString("server", "");
+                        editor.apply();
+
+                        Intent intent = new Intent(getBaseContext(), StartActivity.class);
                         startActivity(intent);
                     }
+
                     @Override
                     public void onError(String message) {
                         Log.d("onError not implemented", message);
@@ -119,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         if (fragment != null) {
             getFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container , fragment)
+                    .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit();
         }
@@ -130,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
