@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final SharedPreferences settings = getSharedPreferences("User", Context.MODE_PRIVATE);
+        final SharedPreferences settings = getSharedPreferences("User", MODE_PRIVATE);
 
         LibraryService.setServerAddress(settings.getString("server", "http://localhost"));
         LibraryService.setTokenFromString(settings.getString("token", LibraryService.getTokenAsString()));
@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         switch (item.getItemId()) {
             case R.id.drawerGadgets:
                 fragment = GadgetListFragment.newInstance(1);
+                break;
             case R.id.drawerMyLoans :
                 fragment = LoanListFragment.newInstance(1);
                 break;
