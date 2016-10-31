@@ -52,18 +52,15 @@ public class StartActivity extends AppCompatActivity implements OnFragmentIntera
     @Override
     public void onClick(View v) {
         Fragment fragment = null;
-        switch (v.getId()) {
-            case R.id.registration_button:
-                fragment = new SignUpFragment();
-                break;
-            case R.id.signin_button:
-                fragment = new SignInFragment();
-                break;
+
+        if ( v.getId() == R.id.registration_button ) {
+            fragment = new SignUpFragment();
         }
 
         getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container_start, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 }
