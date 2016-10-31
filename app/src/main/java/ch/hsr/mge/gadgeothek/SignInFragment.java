@@ -122,15 +122,15 @@ public class SignInFragment extends Fragment {
         showProgress(true);
 
         final SharedPreferences settings = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
-
-        String serverAddress = settings.getString("server", serverInputView.getText().toString());
+        final String serverAddress = settings.getString("server", serverInputView.getText().toString());
 
         LibraryService.setServerAddress(serverAddress);
-        LibraryService.login(email,password, new Callback<Boolean>() {
+        LibraryService.login(email, password, new Callback<Boolean>() {
             @Override
             public void onCompletion(Boolean success) {
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putString("token", LibraryService.getTokenAsString());
+                editor.putString("server", serverAddress);
 
                 editor.apply();
 
