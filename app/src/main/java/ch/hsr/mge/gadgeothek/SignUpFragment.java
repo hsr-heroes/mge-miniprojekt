@@ -28,9 +28,9 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
  */
 public class SignUpFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
-    private EditText emailInputView;
     private View progressBarView;
     private View signupFormView;
+    private EditText emailInputView;
     private EditText passwordInputView;
     private EditText studentIdInputView;
     private EditText nameInputView;
