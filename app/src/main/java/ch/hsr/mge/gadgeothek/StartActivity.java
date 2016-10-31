@@ -1,6 +1,7 @@
 package ch.hsr.mge.gadgeothek;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,16 +14,24 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import ch.hsr.mge.gadgeothek.service.LibraryService;
+
 public class StartActivity extends AppCompatActivity implements OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        getFragmentManager()
-                .beginTransaction()
-                .add(R.id.fragment_container_start, new SignInFragment())
-                .commit();
+        SharedPreferences settings = getSharedPreferences("User", MODE_PRIVATE);
+        if (!settings.getString("token", "").isEmpty()) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.fragment_container_start, new SignInFragment())
+                    .commit();
+        }
     }
 
     @Override

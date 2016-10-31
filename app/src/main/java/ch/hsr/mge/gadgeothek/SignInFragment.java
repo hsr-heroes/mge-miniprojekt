@@ -33,8 +33,9 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
 public class SignInFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private AutoCompleteTextView emailInputView;
+    private EditText emailInputView;
     private EditText passwordInputView;
+    private EditText serverInputView;
     private View progressBarView;
     private View signupFormView;
     private InputValidationHelper inputValidationHelper;
@@ -42,7 +43,6 @@ public class SignInFragment extends Fragment {
     public SignInFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,13 @@ public class SignInFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
         progressBarView = v.findViewById(R.id.sign_in_progress);
         signupFormView = v.findViewById(R.id.sign_in_form);
-        emailInputView = (AutoCompleteTextView) v.findViewById(R.id.sign_in_email);
+        emailInputView = (EditText) v.findViewById(R.id.sign_in_email);
         passwordInputView = (EditText) v.findViewById(R.id.sign_in_password);
+        serverInputView = (EditText) v.findViewById(R.id.server_fragment).findViewById(R.id.server);
         inputValidationHelper = new InputValidationHelper();
 
-        View signupButtonView = v.findViewById(R.id.email_sign_in_button);
-        signupButtonView.setOnClickListener(new View.OnClickListener() {
+        View signInButtonView = v.findViewById(R.id.email_sign_in_button);
+        signInButtonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signInUser(v);
@@ -122,8 +123,7 @@ public class SignInFragment extends Fragment {
 
         final SharedPreferences settings = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
 
-        EditText serverAddressView = (EditText) view.findViewById(R.id.server);
-        String serverAddress = settings.getString("server", serverAddressView.getText().toString());
+        String serverAddress = settings.getString("server", serverInputView.getText().toString());
 
         LibraryService.setServerAddress(serverAddress);
         LibraryService.login(email,password, new Callback<Boolean>() {
