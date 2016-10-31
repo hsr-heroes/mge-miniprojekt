@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 public class StartActivity extends AppCompatActivity implements OnFragmentInteractionListener {
-    public SharedPreferences settings = getSharedPreferences("User", MODE_PRIVATE);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
