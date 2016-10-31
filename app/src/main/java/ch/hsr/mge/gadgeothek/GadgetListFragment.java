@@ -70,17 +70,17 @@ public class GadgetListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            Callback<List<Gadget>> callback = new Callback<List<Gadget>> () {
+
+            LibraryService.getGadgets(new Callback<List<Gadget>> () {
                 @Override
                 public void onCompletion(List<Gadget> input) {
                     recyclerView.setAdapter(new MyGadgetRecyclerViewAdapter(input, mListener));
                 }
                 @Override
                 public void onError(String message) {
-                    Log.d("getGadgets2()", message);
+                    Log.d("getGadgets()", message);
                 }
-            };
-            LibraryService.getGadgets(callback);
+            });
 
         }
         return view;

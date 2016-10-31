@@ -25,14 +25,15 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
 
 public class MainActivity extends AppCompatActivity implements OnFragmentInteractionListener, NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
-    private ActionBarDrawerToggle toggle;
     private Toolbar toolbar;
-    private SharedPreferences settings = getSharedPreferences("User", MODE_PRIVATE);
+    private SharedPreferences settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        settings = getSharedPreferences("User", MODE_PRIVATE);
 
         LibraryService.setServerAddress(settings.getString("server", "http://localhost"));
         LibraryService.setTokenFromString(settings.getString("token", LibraryService.getTokenAsString()));
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
                     @Override
                     public void onCompletion(Boolean input) {
                         SharedPreferences.Editor editor = settings.edit();
-                        editor.putString("server", "");
+                        editor.putString("token", "");
                         editor.apply();
 
                         Intent intent = new Intent(getBaseContext(), StartActivity.class);
@@ -116,7 +117,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
                     @Override
                     public void onError(String message) {
-                        Log.d("onError not implemented", message);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putString("token", "");
+                        editor.apply();
+
+                        Intent intent = new Intent(getBaseContext(), StartActivity.class);
+                        startActivity(intent);
                     }
                 });
         }
