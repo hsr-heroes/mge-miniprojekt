@@ -20,9 +20,6 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
     <!-- Strings related to settings -->
     <string name="prompt_spinner">Choose a server</string>
@@ -33,12 +30,11 @@
         <item>Custom</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_reservation_add">Add Reservation</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="action_logout">Logout</string>
     <string name="title_activity_start">Sign in</string>
-    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in">Log in</string>
     <string name="error_invalid_password">This password is too short</string>
-    <string name="action_registration">Sign Up</string>
+    <string name="action_registration">No account yet? Create one</string>
 </resources>
