@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:visibility="invisible" >
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/server"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

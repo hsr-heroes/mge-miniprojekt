@@ -23,18 +23,28 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="88dp"
+                android:minHeight="88dp"
+                android:layout_marginBottom="16dp"
+                android:tint="@color/accent"
+                android:src="@drawable/ic_devices_other_black_24dp"
+                android:id="@+id/imageView2"
+                android:contentDescription="@string/app_name" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/sign_in_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -42,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
+                <android.support.design.widget.TextInputEditText
                     android:id="@+id/sign_in_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -51,8 +61,7 @@
                     android:imeActionLabel="@string/action_sign_in"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:maxLines="1" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -61,26 +70,25 @@
                 class="ch.hsr.mge.gadgeothek.ServerAddressFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_sign_in"/>
+                tools:layout="@layout/fragment_server_address" />
 
             <Button
                 android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
-            <Button
+            <TextView
                 android:id="@+id/registration_button"
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:text="@string/action_registration"
-                android:textStyle="bold"/>
-
+                android:textAlignment="center"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

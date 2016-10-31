@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,9 +34,9 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
 public class SignInFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
-    private EditText emailInputView;
-    private EditText passwordInputView;
-    private EditText serverInputView;
+    private TextInputEditText emailInputView;
+    private TextInputEditText passwordInputView;
+    private TextInputEditText serverInputView;
     private View progressBarView;
     private View signupFormView;
     private InputValidationHelper inputValidationHelper;
@@ -56,9 +57,9 @@ public class SignInFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_sign_in, container, false);
         progressBarView = v.findViewById(R.id.sign_in_progress);
         signupFormView = v.findViewById(R.id.sign_in_form);
-        emailInputView = (EditText) v.findViewById(R.id.sign_in_email);
-        passwordInputView = (EditText) v.findViewById(R.id.sign_in_password);
-        serverInputView = (EditText) v.findViewById(R.id.server_fragment).findViewById(R.id.server);
+        emailInputView = (TextInputEditText) v.findViewById(R.id.sign_in_email);
+        passwordInputView = (TextInputEditText) v.findViewById(R.id.sign_in_password);
+        serverInputView = (TextInputEditText) v.findViewById(R.id.server_fragment).findViewById(R.id.server);
         inputValidationHelper = new InputValidationHelper();
 
         View signInButtonView = v.findViewById(R.id.email_sign_in_button);

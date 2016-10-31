@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,13 +28,12 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
  * create an instance of this fragment.
  */
 public class SignUpFragment extends Fragment {
-    private OnFragmentInteractionListener mListener;
     private View progressBarView;
     private View signupFormView;
-    private EditText emailInputView;
-    private EditText passwordInputView;
-    private EditText studentIdInputView;
-    private EditText nameInputView;
+    private TextInputEditText emailInputView;
+    private TextInputEditText passwordInputView;
+    private TextInputEditText studentIdInputView;
+    private TextInputEditText nameInputView;
     private InputValidationHelper inputValidationHelper;
     private View submitButtonView;
 
@@ -55,12 +55,11 @@ public class SignUpFragment extends Fragment {
 
         progressBarView = v.findViewById(R.id.signup_progress);
         signupFormView = v.findViewById(R.id.signup_form);
-        emailInputView = (EditText) v.findViewById(R.id.email);
-        passwordInputView = (EditText) v.findViewById(R.id.password);
-        nameInputView = (EditText) v.findViewById(R.id.name);
-        studentIdInputView = (EditText) v.findViewById(R.id.student_id);
+        emailInputView = (TextInputEditText) v.findViewById(R.id.email);
+        passwordInputView = (TextInputEditText) v.findViewById(R.id.password);
+        nameInputView = (TextInputEditText) v.findViewById(R.id.name);
+        studentIdInputView = (TextInputEditText) v.findViewById(R.id.student_id);
         submitButtonView = v.findViewById(R.id.signup_button);
-        v.findViewById(R.id.signin_button).setOnClickListener(mListener);
 
         inputValidationHelper = new InputValidationHelper();
 
@@ -168,23 +167,6 @@ public class SignUpFragment extends Fragment {
                 Snackbar.make(submitButtonView, message, Snackbar.LENGTH_INDEFINITE);
             }
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**
