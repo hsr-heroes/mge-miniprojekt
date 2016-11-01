@@ -1,31 +1,70 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ch.hsr.mge.gadgeothek.GadgetDetailFragment">
+    tools:context="ch.hsr.mge.gadgeothek.GadgetDetailFragment"
+    android:weightSum="1"
+    android:layout_margin="@dimen/activity_horizontal_margin">
 
-    <TextView
-        android:text="TextView"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gadget_name" />
+        app:srcCompat="@drawable/ic_devices_other_black_24dp"
+        android:id="@+id/imageView"
+        android:layout_weight="0.25" />
 
     <TextView
-        android:text="TextView"
+        android:text="Gadget Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gadget_manufacturer" />
+        android:id="@+id/gadget_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textAlignment="center"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin" />
 
     <TextView
-        android:text="TextView"
+        android:text="Manufacturer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gadget_price" />
+        android:id="@+id/gadget_manufacturer"
+        android:drawableLeft="@drawable/ic_business_black_24dp"
+        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin" />
 
     <TextView
-        android:text="TextView"
+        android:text="Price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gadget_condition" />
+        android:id="@+id/gadget_price"
+        android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin" />
+
+    <TextView
+        android:text="Condition"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gadget_condition"
+        android:drawableLeft="@drawable/ic_star_border_black_24dp"
+        android:drawablePadding="@dimen/activity_horizontal_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin" />
+
+    <Button
+        android:id="@+id/reservation_button"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/action_add_reservation"
+        android:textStyle="bold" />
+
 </LinearLayout>

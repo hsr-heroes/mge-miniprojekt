@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Locale;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
+import ch.hsr.mge.gadgeothek.service.Callback;
+import ch.hsr.mge.gadgeothek.service.LibraryService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,9 +62,24 @@ public class GadgetDetailFragment extends Fragment {
         TextView manufacturer = (TextView) v.findViewById(R.id.gadget_manufacturer);
         manufacturer.setText(mGadget.getManufacturer());
         TextView price = (TextView) v.findViewById(R.id.gadget_price);
-        price.setText(String.format(Locale.getDefault(), "%f", mGadget.getPrice()));
+        price.setText(String.format(Locale.getDefault(), "%.2f", mGadget.getPrice()));
         TextView condition = (TextView) v.findViewById(R.id.gadget_condition);
         condition.setText(mGadget.getCondition().toString());
+        v.findViewById(R.id.reservation_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LibraryService.reserveGadget(mGadget, new Callback<Boolean>() {
+                    @Override
+                    public void onCompletion(Boolean input) {
+                        Toast.makeText(getActivity(), "Reservation successful", Toast.LENGTH_LONG).show();
+                    }
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(getActivity(), "Reservation failed", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
     }
 
     @Override
