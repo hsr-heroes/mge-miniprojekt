@@ -123,7 +123,7 @@ public class SignInFragment extends Fragment {
         showProgress(true);
 
         final SharedPreferences settings = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
-        final String serverAddress = settings.getString("server", serverInputView.getText().toString());
+        final String serverAddress = serverInputView.getText().toString();
 
         LibraryService.setServerAddress(serverAddress);
         LibraryService.login(email, password, new Callback<Boolean>() {
