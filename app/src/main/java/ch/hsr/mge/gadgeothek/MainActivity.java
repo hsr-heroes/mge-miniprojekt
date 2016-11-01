@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
         settings = getSharedPreferences("User", MODE_PRIVATE);
 
-        LibraryService.setServerAddress(settings.getString("server", "http://localhost"));
+        LibraryService.setServerAddress(settings.getString("server", "http://mge1.dev.ifs.hsr.ch"));
         LibraryService.setTokenFromString(settings.getString("token", LibraryService.getTokenAsString()));
 
         drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
