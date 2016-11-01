@@ -72,17 +72,12 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
     public void onListFragmentInteraction(Object item) {
         Fragment fragment;
         if (item instanceof Gadget) {
-            fragment = GadgetDetailFragment.newInstance((Gadget) item);
-        } else if (item instanceof Loan) {
-            fragment = LoanDetailFragment.newInstance((Loan) item);
-        } else {
-            return;
-        }
-        getFragmentManager()
+            getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, GadgetDetailFragment.newInstance((Gadget) item))
                 .addToBackStack(null)
                 .commit();
+        }
     }
 
     @Override

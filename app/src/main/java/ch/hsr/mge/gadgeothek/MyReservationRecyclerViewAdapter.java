@@ -53,16 +53,6 @@ public class MyReservationRecyclerViewAdapter extends RecyclerView.Adapter<MyRes
         holder.mDate.setText(dateFormat.format(mValues.get(position).getReservationDate()));
         holder.mFinished.setText(mValues.get(position).getFinished() ? "finished" : "open");
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-            }
-        });
     }
 
     @Override
