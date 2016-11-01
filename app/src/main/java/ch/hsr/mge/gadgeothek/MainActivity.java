@@ -100,9 +100,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             case R.id.drawerMyReservations:
                 fragment = ReservationListFragment.newInstance(1);
                 break;
-            case R.id.drawerNewReservation:
-                fragment = ReservationAddFragment.newInstance(0);
-                break;
             default: // case R.id.drawerLogout :
                 LibraryService.logout(new Callback<Boolean>() {
                     @Override
