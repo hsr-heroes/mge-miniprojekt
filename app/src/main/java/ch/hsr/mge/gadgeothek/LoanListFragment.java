@@ -58,18 +58,20 @@ public class LoanListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_loan_list, container, false);
-
+        View rView = inflater.inflate(R.layout.fragment_loan_list, container, false);
+        View view = rView.findViewById(R.id.loan_list);
         mListener.setToolbarTitle("My Loans");
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (view instanceof EmptyRecyclerView) {
             Context context = view.getContext();
-            final RecyclerView recyclerView = (RecyclerView) view;
+            final EmptyRecyclerView recyclerView = (EmptyRecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            View emptyView = rView.findViewById(R.id.loan_list_empty);
+            recyclerView.setEmptyView(emptyView);
             Callback<List<Loan>> callback = new Callback<List<Loan>> () {
                 @Override
                 public void onCompletion(List<Loan> input) {
@@ -83,7 +85,7 @@ public class LoanListFragment extends Fragment {
             LibraryService.getLoansForCustomer(callback);
 
         }
-        return view;
+        return rView;
     }
 
 

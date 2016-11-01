@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loan_list"
-    android:name="ch.hsr.mge.gadgeothek.LoanFragment"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="vertical"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
-    tools:context="ch.hsr.mge.gadgeothek.LoanListFragment"
-    tools:listitem="@layout/fragment_loan" />
+    android:layout_height="match_parent">
+
+    <ch.hsr.mge.gadgeothek.EmptyRecyclerView
+        android:id="@+id/loan_list"
+        android:name="ch.hsr.mge.gadgeothek.LoanFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="ch.hsr.mge.gadgeothek.LoanListFragment"
+        tools:listitem="@layout/fragment_loan" />
+
+    <LinearLayout
+        android:id="@+id/loan_list_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:textAlignment="center">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_update_black_24dp"
+            android:id="@+id/icon_reservation"
+            android:paddingTop="@dimen/activity_horizontal_margin"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/reservations_empty_list"
+            android:gravity="center" />
+
+
+    </LinearLayout>
+</LinearLayout>
