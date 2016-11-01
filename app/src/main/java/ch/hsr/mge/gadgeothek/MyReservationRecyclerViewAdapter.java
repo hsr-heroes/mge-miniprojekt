@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ch.hsr.mge.gadgeothek.domain.Reservation;
@@ -35,8 +38,10 @@ public class MyReservationRecyclerViewAdapter extends RecyclerView.Adapter<MyRes
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getReservationId());
-        holder.mContentView.setText(mValues.get(position).getGadget().getName());
+        holder.mGadgetView.setText(mValues.get(position).getGadget().getName());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy");
+        holder.mDate.setText(dateFormat.format(mValues.get(position).getReservationDate()));
+        holder.mFinished.setText(mValues.get(position).getFinished() ? "finished" : "open");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,20 +62,23 @@ public class MyReservationRecyclerViewAdapter extends RecyclerView.Adapter<MyRes
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mGadgetView;
+        public final TextView mDate;
+        public final TextView mFinished;
         public Reservation mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.reservation_text);
-            mContentView = (TextView) view.findViewById(R.id.reservation_content);
+            mGadgetView = (TextView) view.findViewById(R.id.reservation_item_gadget);
+            mDate = (TextView) view.findViewById(R.id.reservation_item_date);
+            mFinished = (TextView) view.findViewById(R.id.reservation_item_finished);
+
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mGadgetView.getText() + "' on '" + mDate.getText();
         }
     }
 }
