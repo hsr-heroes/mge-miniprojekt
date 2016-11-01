@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class ReservationListFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnFragmentInteractionListener mListener;
+    private MyReservationRecyclerViewAdapter adapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -73,7 +75,10 @@ public class ReservationListFragment extends Fragment {
             Callback<List<Reservation>> callback = new Callback<List<Reservation>> () {
                 @Override
                 public void onCompletion(List<Reservation> input) {
-                    recyclerView.setAdapter(new MyReservationRecyclerViewAdapter(input, mListener));
+                    adapter = new MyReservationRecyclerViewAdapter(input, mListener);
+                    recyclerView.setAdapter(adapter);
+                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(adapter.getItemTouchHelperCallback(getResources()));
+                    itemTouchHelper.attachToRecyclerView(recyclerView);
                 }
                 @Override
                 public void onError(String message) {
@@ -85,6 +90,8 @@ public class ReservationListFragment extends Fragment {
         }
         return view;
     }
+
+
 
 
     @Override
