@@ -25,8 +25,14 @@
     <string name="prompt_spinner">Choose a server</string>
     <string name="prompt_server">Server address</string>
     <string-array name="server_array">
-        <item>MG1</item>
-        <item>Localhost</item>
+        <item>MGE1</item>
+        <item>MGE2</item>
+        <item>MGE3</item>
+        <item>MGE4</item>
+        <item>MGE5</item>
+        <item>MGE6</item>
+        <item>MGE7</item>
+        <item>MGE8</item>
         <item>Custom</item>
     </string-array>
 

@@ -65,20 +65,12 @@ public class ServerAddressFragment extends Fragment implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         String selection = (String) parent.getItemAtPosition(position);
-        Log.d("TAG", selection);
-        switch (selection) {
-            case "Localhost":
-                address.setText("http://localhost");
-                serverLayout.setVisibility(View.INVISIBLE);
-                break;
-            case "MG1":
-                address.setText("http://mge1.dev.ifs.hsr.ch");
-                serverLayout.setVisibility(View.INVISIBLE);
-                break;
-            default:
-                serverLayout.setVisibility(View.VISIBLE);
+        if (selection.equals("Custom")) {
+            serverLayout.setVisibility(View.VISIBLE);
+        } else {
+            serverLayout.setVisibility(View.INVISIBLE);
+            address.setText("http://" + selection.toLowerCase() + ".dev.ifs.hsr.ch");
         }
-
     }
 
     @Override
