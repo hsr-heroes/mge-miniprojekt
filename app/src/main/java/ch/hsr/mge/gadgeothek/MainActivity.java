@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
             fragment = GadgetDetailFragment.newInstance((Gadget) item);
         } else if (item instanceof Loan) {
             fragment = LoanDetailFragment.newInstance((Loan) item);
-        } else if (item instanceof Reservation) {
-            fragment = ReservationDetailFragment.newInstance((Reservation) item);
         } else {
             throw new IllegalStateException("Item is not an instance of Gadget, Loan or Reservation");
         }
