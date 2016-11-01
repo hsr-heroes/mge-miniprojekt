@@ -35,8 +35,9 @@ public class MyGadgetRecyclerViewAdapter extends RecyclerView.Adapter<MyGadgetRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getInventoryNumber());
-        holder.mContentView.setText(mValues.get(position).getName());
+        holder.mNameView.setText(mValues.get(position).getName());
+        holder.mManufacturerView.setText(mValues.get(position).getManufacturer());
+        holder.mPriceView.setText("CHF " + String.format("%.2f", mValues.get(position).getPrice()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,20 +58,22 @@ public class MyGadgetRecyclerViewAdapter extends RecyclerView.Adapter<MyGadgetRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mNameView;
+        public final TextView mManufacturerView;
+        public final TextView mPriceView;
         public Gadget mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.gadget_id);
-            mContentView = (TextView) view.findViewById(R.id.gadget_content);
+            mNameView = (TextView) view.findViewById(R.id.gadget_item_name);
+            mManufacturerView = (TextView) view.findViewById(R.id.gadget_item_manufacturer);
+            mPriceView = (TextView) view.findViewById(R.id.gadget_item_price);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + "'";
         }
     }
 }
