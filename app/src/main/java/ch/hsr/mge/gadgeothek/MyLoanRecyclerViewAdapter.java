@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ch.hsr.mge.gadgeothek.domain.Loan;
@@ -34,9 +37,13 @@ public class MyLoanRecyclerViewAdapter extends RecyclerView.Adapter<MyLoanRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        boolean returned = mValues.get(position).getReturnDate() != null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy");
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getLoanId());
-        holder.mContentView.setText(mValues.get(position).getGadget().getName());
+        holder.mGadget.setText(mValues.get(position).getGadget().getName());
+        holder.mDate.setText(dateFormat.format(mValues.get(position).getPickupDate()) +
+                (returned ? " - " + dateFormat.format(mValues.get(position).getReturnDate()) : ""));
+        holder.mStatus.setText( returned ? "returned" : "open");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,20 +64,22 @@ public class MyLoanRecyclerViewAdapter extends RecyclerView.Adapter<MyLoanRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView mGadget;
+        public final TextView mDate;
+        public final TextView mStatus;
         public Loan mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.loan_text);
-            mContentView = (TextView) view.findViewById(R.id.loan_content);
+            mGadget = (TextView) view.findViewById(R.id.loan_item_gadget);
+            mDate = (TextView) view.findViewById(R.id.loan_item_date);
+            mStatus = (TextView) view.findViewById(R.id.loan_item_status);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mGadget.getText() + "'";
         }
     }
 }

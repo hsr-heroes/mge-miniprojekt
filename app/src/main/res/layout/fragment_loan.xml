@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingRight="@dimen/text_margin"
+    android:paddingLeft="@dimen/text_margin"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp" >
 
-    <TextView
-        android:id="@+id/loan_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/loan_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        <TextView
+            android:text="Gadget Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loan_item_gadget"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
+
+        <TextView
+            android:text="Pickup and Return Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loan_item_date"
+            android:textAppearance="?attr/textAppearanceSearchResultSubtitle"
+            android:layout_below="@+id/loan_item_gadget"
+            />
+
+        <TextView
+            android:text="Loan Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loan_item_status"
+            android:layout_alignParentRight="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+    </RelativeLayout>
+
 </LinearLayout>
