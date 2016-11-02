@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ch.hsr.mge.gadgeothek.domain.Gadget;
-
 import java.util.List;
+
+import ch.hsr.mge.gadgeothek.domain.Gadget;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Gadget} and makes a call to the

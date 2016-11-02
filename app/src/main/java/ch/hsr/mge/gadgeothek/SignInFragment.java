@@ -2,13 +2,13 @@ package ch.hsr.mge.gadgeothek;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.design.widget.TextInputEditText;
 import android.util.Log;
 import android.view.LayoutInflater;
