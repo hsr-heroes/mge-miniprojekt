@@ -33,7 +33,7 @@ public class StartActivityTest {
     }
 
     public void validatesPassword() {
-        onView(withId(R.id.sign_in_email)).perform(typeText("foo@example.com"), closeSoftKeyboard());
+        onView(withId(R.id.sign_in_password)).perform(typeText(""), closeSoftKeyboard());
         onView(withId(R.id.sign_in_password)).check(matches(withHint("This field is required")));
     }
 }
