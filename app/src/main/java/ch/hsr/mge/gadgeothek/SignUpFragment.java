@@ -36,6 +36,7 @@ public class SignUpFragment extends Fragment {
     private TextInputEditText nameInputView;
     private InputValidationHelper inputValidationHelper;
     private View submitButtonView;
+    private TextInputEditText serverInputView;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -60,6 +61,7 @@ public class SignUpFragment extends Fragment {
         nameInputView = (TextInputEditText) v.findViewById(R.id.name);
         studentIdInputView = (TextInputEditText) v.findViewById(R.id.student_id);
         submitButtonView = v.findViewById(R.id.signup_button);
+        serverInputView = (TextInputEditText) v.findViewById(R.id.server_fragment).findViewById(R.id.server);
 
         inputValidationHelper = new InputValidationHelper();
 
@@ -122,7 +124,7 @@ public class SignUpFragment extends Fragment {
         EditText serverAddressView = (EditText) view.findViewById(R.id.server);
 
         // Todo: Validate server address.
-        final String serverAddress = serverAddressView.getText().toString();
+        final String serverAddress = serverInputView.getText().toString();
 
         // Show a progress spinner, and kick off the async signup task.
         showProgress(true);
