@@ -25,19 +25,26 @@
         android:orientation="vertical"
         android:textAlignment="center">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_update_black_24dp"
-            android:id="@+id/icon_reservation"
-            android:paddingTop="@dimen/activity_horizontal_margin"/>
+            android:id="@+id/icon_loan"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            android:text="@string/reservations_empty_list"
-            android:gravity="center" />
+            android:text="@string/loans_empty_list"
+            android:gravity="top|center"
+            android:layout_weight="2" />
 
 
     </LinearLayout>

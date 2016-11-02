@@ -45,4 +45,6 @@
     <string name="action_registration">No account yet? Create one</string>
     <string name="action_add_reservation">Reserve gadget</string>
     <string name="reservations_empty_list">You have no reservations yet.</string>
+    <string name="loans_empty_list">You have no loans yet.</string>
+    <string name="gadgets_empty_list">There are no gadgets yet.</string>
 </resources>

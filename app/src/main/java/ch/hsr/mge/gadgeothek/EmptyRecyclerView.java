@@ -40,7 +40,6 @@ public class EmptyRecyclerView extends RecyclerView {
 
     @Override
     public void setAdapter(Adapter adapter) {
-        Log.d("EMPTY LIST", "setAdapter() <-------------------------------------------------------------------");
         final Adapter oldAdapter = getAdapter();
         if (oldAdapter != null) {
             oldAdapter.unregisterAdapterDataObserver(observer);
@@ -53,7 +52,6 @@ public class EmptyRecyclerView extends RecyclerView {
     }
 
     private void checkIfEmpty() {
-        Log.d("EMPTY LIST", "checkIfEmpty() <-------------------------------------------------------------------");
         if (emptyView != null) {
             emptyView.setVisibility(getAdapter().getItemCount() > 0 ? GONE : VISIBLE);
             setVisibility(getAdapter().getItemCount() > 0 ? VISIBLE : GONE);
@@ -61,8 +59,6 @@ public class EmptyRecyclerView extends RecyclerView {
     }
 
     public void setEmptyView(View emptyView) {
-        Log.d("EMPTY LIST", "setEmptyView() <-------------------------------------------------------------------");
-        Log.d("EMPTY LIST", emptyView.toString() + " <- setEmptyView() <-------------------------------------------------------------------");
         this.emptyView = emptyView;
     }
 
