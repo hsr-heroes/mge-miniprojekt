@@ -71,7 +71,11 @@ public class GadgetDetailFragment extends Fragment {
                 LibraryService.reserveGadget(mGadget, new Callback<Boolean>() {
                     @Override
                     public void onCompletion(Boolean input) {
-                        Toast.makeText(getActivity(), "Reservation successful", Toast.LENGTH_LONG).show();
+                        if (input) {
+                            Toast.makeText(getActivity(), "Reservation successful", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Reservation failed:\nMaximum number of reservations reached", Toast.LENGTH_LONG).show();
+                        }
                     }
                     @Override
                     public void onError(String message) {
