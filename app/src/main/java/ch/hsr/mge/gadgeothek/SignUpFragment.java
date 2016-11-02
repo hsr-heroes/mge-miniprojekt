@@ -141,11 +141,8 @@ public class SignUpFragment extends Fragment {
                         SharedPreferences settings = getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
 
+                        editor.putString("token", LibraryService.getTokenAsString());
                         editor.putString("server", serverAddress);
-                        editor.putString("name", name);
-                        editor.putString("email", email);
-                        editor.putString("studentId", studentId);
-
                         editor.apply();
 
                         Intent intent = new Intent(getActivity(), MainActivity.class);
