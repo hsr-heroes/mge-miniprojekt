@@ -73,6 +73,9 @@ public class ReservationListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                    getActivity()
+            ));
             View emptyView = rView.findViewById(R.id.reservation_list_empty);
             recyclerView.setEmptyView(emptyView);
             Callback<List<Reservation>> callback = new Callback<List<Reservation>> () {

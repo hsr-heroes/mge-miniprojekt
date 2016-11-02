@@ -70,6 +70,9 @@ public class LoanListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                    getActivity()
+            ));
             View emptyView = rView.findViewById(R.id.loan_list_empty);
             recyclerView.setEmptyView(emptyView);
             Callback<List<Loan>> callback = new Callback<List<Loan>> () {

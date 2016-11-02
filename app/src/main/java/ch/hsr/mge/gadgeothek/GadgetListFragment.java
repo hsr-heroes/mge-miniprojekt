@@ -71,6 +71,9 @@ public class GadgetListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            recyclerView.addItemDecoration(new SimpleDividerItemDecoration(
+                    getActivity()
+            ));
             View emptyView = rView.findViewById(R.id.gadget_list_empty);
             recyclerView.setEmptyView(emptyView);
             LibraryService.getGadgets(new Callback<List<Gadget>> () {
