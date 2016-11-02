@@ -37,6 +37,7 @@ public class SignUpFragment extends Fragment {
     private InputValidationHelper inputValidationHelper;
     private View submitButtonView;
     private TextInputEditText serverInputView;
+    private View v;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -52,8 +53,9 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_sign_up, container, false);
-
+        if (v == null) {
+            v = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        }
         progressBarView = v.findViewById(R.id.signup_progress);
         signupFormView = v.findViewById(R.id.signup_form);
         emailInputView = (TextInputEditText) v.findViewById(R.id.email);
