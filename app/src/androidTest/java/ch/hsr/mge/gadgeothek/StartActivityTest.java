@@ -27,11 +27,13 @@ public class StartActivityTest {
         // Todo: implement.
     }
 
+    @Test
     public void validatesEmail() {
         onView(withId(R.id.sign_in_email)).perform(typeText("invalid"), closeSoftKeyboard());
         onView(withId(R.id.sign_in_email)).check(matches(withHint("This field is required")));
     }
 
+    @Test
     public void validatesPassword() {
         onView(withId(R.id.sign_in_password)).perform(typeText(""), closeSoftKeyboard());
         onView(withId(R.id.sign_in_password)).check(matches(withHint("This field is required")));
