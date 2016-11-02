@@ -6,24 +6,31 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:background="@color/primary">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/email"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:text="Vorname Nachname"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:minWidth="88dp"
+        android:minHeight="88dp"
+        android:gravity="center"
+        android:tint="@color/accent"
+        android:src="@drawable/ic_devices_other_black_24dp"
+        android:id="@+id/header_icon"
+        android:contentDescription="@string/app_name" />
 
     <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_vertical_margin"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:text="mirko.stocker@hsr.ch"
+        android:id="@+id/header_title"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <TextView
+        android:id="@+id/header_server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Server Address"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

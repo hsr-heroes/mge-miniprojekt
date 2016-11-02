@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Loan;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements OnFragmentInterac
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView headerServer = (TextView) navigationView.getHeaderView(0).findViewById(R.id.header_server);
+        headerServer.setText(LibraryService.getServerAddress());
 
         getFragmentManager()
                 .beginTransaction()

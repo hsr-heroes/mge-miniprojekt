@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import ch.hsr.mge.gadgeothek.domain.Gadget;
 import ch.hsr.mge.gadgeothek.domain.Loan;
@@ -23,6 +24,10 @@ public class LibraryService {
     public static void setServerAddress(String address) {
         Log.d(TAG, "Setting server to " + address);
         serverUrl = address + "/public";
+    }
+
+    public static String getServerAddress() {
+        return serverUrl;
     }
 
     public static boolean isLoggedIn() {
