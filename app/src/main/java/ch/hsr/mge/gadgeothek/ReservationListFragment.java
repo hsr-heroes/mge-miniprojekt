@@ -38,7 +38,6 @@ public class ReservationListFragment extends Fragment {
     public ReservationListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ReservationListFragment newInstance(int columnCount) {
         ReservationListFragment fragment = new ReservationListFragment();

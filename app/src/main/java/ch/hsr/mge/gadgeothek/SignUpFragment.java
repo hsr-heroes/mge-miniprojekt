@@ -123,7 +123,6 @@ public class SignUpFragment extends Fragment {
 
         EditText serverAddressView = (EditText) view.findViewById(R.id.server);
 
-        // Todo: Validate server address.
         final String serverAddress = serverInputView.getText().toString();
 
         // Show a progress spinner, and kick off the async signup task.

@@ -36,7 +36,6 @@ public class GadgetListFragment extends Fragment {
     public GadgetListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static GadgetListFragment newInstance(int columnCount) {
         GadgetListFragment fragment = new GadgetListFragment();

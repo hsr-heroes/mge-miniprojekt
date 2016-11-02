@@ -25,7 +25,6 @@ import ch.hsr.mge.gadgeothek.service.LibraryService;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Reservation} and makes a call to the
  * specified {@link OnFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyReservationRecyclerViewAdapter extends RecyclerView.Adapter<MyReservationRecyclerViewAdapter.ViewHolder> {
 

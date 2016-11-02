@@ -36,7 +36,6 @@ public class LoanListFragment extends Fragment {
     public LoanListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static LoanListFragment newInstance(int columnCount) {
         LoanListFragment fragment = new LoanListFragment();

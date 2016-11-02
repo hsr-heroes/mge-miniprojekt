@@ -16,7 +16,6 @@ import ch.hsr.mge.gadgeothek.domain.Loan;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Loan} and makes a call to the
  * specified {@link OnFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyLoanRecyclerViewAdapter extends RecyclerView.Adapter<MyLoanRecyclerViewAdapter.ViewHolder> {
 

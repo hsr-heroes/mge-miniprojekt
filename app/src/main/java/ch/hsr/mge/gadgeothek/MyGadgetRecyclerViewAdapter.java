@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Gadget} and makes a call to the
  * specified {@link OnFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
  */
 public class MyGadgetRecyclerViewAdapter extends RecyclerView.Adapter<MyGadgetRecyclerViewAdapter.ViewHolder> {
 
