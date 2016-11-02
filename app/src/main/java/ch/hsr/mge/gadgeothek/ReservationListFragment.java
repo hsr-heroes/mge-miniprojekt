@@ -60,18 +60,21 @@ public class ReservationListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_reservation_list, container, false);
+        View rView = inflater.inflate(R.layout.fragment_reservation_list, container, false);
+        View view = rView.findViewById(R.id.reservation_list);
 
         mListener.setToolbarTitle("My Reservations");
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (view instanceof EmptyRecyclerView) {
             Context context = view.getContext();
-            final RecyclerView recyclerView = (RecyclerView) view;
+            final EmptyRecyclerView recyclerView = (EmptyRecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            View emptyView = rView.findViewById(R.id.reservation_list_empty);
+            recyclerView.setEmptyView(emptyView);
             Callback<List<Reservation>> callback = new Callback<List<Reservation>> () {
                 @Override
                 public void onCompletion(List<Reservation> input) {
@@ -88,7 +91,7 @@ public class ReservationListFragment extends Fragment {
             LibraryService.getReservationsForCustomer(callback);
 
         }
-        return view;
+        return rView;
     }
 
 
