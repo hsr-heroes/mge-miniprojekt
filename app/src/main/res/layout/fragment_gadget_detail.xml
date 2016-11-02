@@ -60,10 +60,12 @@
 
     <Button
         android:id="@+id/reservation_button"
-        style="?android:textAppearanceSmall"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:paddingStart="64dp"
+        android:paddingEnd="64dp"
         android:text="@string/action_add_reservation"
         android:textStyle="bold" />
 
