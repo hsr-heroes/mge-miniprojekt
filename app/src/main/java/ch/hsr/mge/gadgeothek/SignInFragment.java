@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import ch.hsr.mge.gadgeothek.service.Callback;
 import ch.hsr.mge.gadgeothek.service.LibraryService;
@@ -145,7 +146,9 @@ public class SignInFragment extends Fragment {
             public void onError(String message) {
                 showProgress(false);
                 Log.d(getString(R.string.app_name), "Login error: " + message);
-
+                Toast.makeText(getActivity(), "Login failed: " + message, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), StartActivity.class);
+                startActivity(intent);
             }
         });
     }
